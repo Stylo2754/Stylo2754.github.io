@@ -1,34 +1,34 @@
 ---
-title: "My Name"       # the title of the index page
+title: "Stanley Lo"       # the title of the index page
 about:
   # template types
   #template: jolla
   template: trestles
   #template: broadside
   # image details
-  image: files/profile-pic.jpg
+    image: "files/profile pic.jpeg"
   image-width: 20em            # to adjust size
   image-shape: round           # to make round
   
   links:
     # add others
     - icon: linkedin
-      href: https://www.linkedin.com/school/claremont-mckenna-college/posts/?feedView=all
+      href: https://www.linkedin.com/in/stanleylo4/
     - icon: twitter-x
-      href: https://x.com/CMCnews
+      href: https://x.com/stanleylo_4
 
 ---
 
-I am a ... blah blah
+I'm Stanley, a Senior at Claremont McKenna College studying Econ w/Data Science Sequence and interested in building & investing in startups.
 
 ## Education
 
-Institution | City, State
-B.A in Degree | start - finish
+Claremont McKenna College | Claremont, CA
+B.A in Degree | 2023 - 2027
 
 ## Experience
 
-Organization A | Title | start - finish
+Nucleus | Research | Mar 2026 - Present
 
-Organization b | Title | start - finish
+Edge Case | Venture Intern | Jun 2025 - Aug 2025
 
