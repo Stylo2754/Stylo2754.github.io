@@ -39,16 +39,9 @@ website:
         text: Resume                 # resume page title
         
       # pages without a dropdown
-      - text: "Project Title"            # page text
+      - text: "Restaurant dining"         # page text
         href: pages/project/index.qmd    # projects listing page
         
-      # pages with a dropdown
-      - text: "Project Title w/DD"       # page text
-        menu: 
-          - pages/project/page01.qmd     # the first page
-      # - pages/othername.qmd    # the second page
-
-
     right: # right side of navbar 
       - icon: github
         href: https://mygithub.com/

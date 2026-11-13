@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Stanley Lo">
 
-<title>This is the pages/project/index page title</title>
+<title>What the restaurant visits show</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -39,10 +40,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-c40d6e0ac341574fdab93072815cc0f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-1eef4d9d98f063e6f10a0853f97cbca5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,19 +105,8 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../../pages/project/index.html" aria-current="page"> 
-<span class="menu-text">Project Title</span></a>
+<span class="menu-text">Restaurant dining</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-project-title-wdd" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Project Title w/DD</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-project-title-wdd">    
-        <li>
-    <a class="dropdown-item" href="../../pages/project/page01.html">
- <span class="dropdown-text">This is the pages/project/page01.qmd title</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -131,11 +121,6 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://x.com/CMCnews"> <i class="bi bi-twitter-x" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://bsky.app/profile/cmc.edu"> <i class="bi bi-bluesky" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -156,13 +141,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">This is the pages/project/index page title</h1>
+<h1 class="title">What the restaurant visits show</h1>
 </div>
 
 
 
 <div class="quarto-title-meta column-page">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Stanley Lo </p>
+          </div>
+  </div>
     
   
     
@@ -173,44 +164,28 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is a Quarto website.</p>
-<section id="this-is-a-header" class="level2">
-<h2 class="anchored" data-anchor-id="this-is-a-header">This is a header</h2>
-<p>With content …</p>
-<section id="and-a-sub-header" class="level3">
-<h3 class="anchored" data-anchor-id="and-a-sub-header">And a sub-header</h3>
-<p>And more content …</p>
-</section>
-<section id="and-a-code-block" class="level3">
-<h3 class="anchored" data-anchor-id="and-a-code-block">And a code block</h3>
-</section>
-</section>
-<section id="plot-header" class="level2">
-<h2 class="anchored" data-anchor-id="plot-header">Plot Header</h2>
+<p>I wanted to see which cuisines appear most often in these 2,000 restaurant visits, then check whether the weekday and weekend mix changes by cuisine. The first chart counts visits. The second divides each cuisine’s visits into weekday and weekend shares, so a cuisine with more visits does not automatically look like it has a bigger weekend share.</p>
+<section id="which-cuisines-show-up-most" class="level2">
+<h2 class="anchored" data-anchor-id="which-cuisines-show-up-most">Which cuisines show up most?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../..\pages/project/figs/mpg-by-hp.png" class="img-fluid figure-img" style="width:80.0%" alt="This is alt-text for describing the plot for screen readers ..."></p>
-<figcaption>Caption Text</figcaption>
+<p><img src="../../pages/project/figs/restaurant_cuisine_counts.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Number of recorded restaurant visits for each cuisine, sorted from most to least</figcaption>
 </figure>
 </div>
+<p>Italian has 439 visits and Asian has 434, nearly tied at the top. Seafood has 167, the fewest in this file. This tells me how the recorded visits are distributed, but not why people chose a cuisine.</p>
 </section>
-<section id="plot-explanation" class="level2">
-<h2 class="anchored" data-anchor-id="plot-explanation">Plot Explanation</h2>
-<p>Blah, blah, blah …</p>
-<!-- SAVE PLOT AS PNG -->
-</section>
-<section id="plot-header-1" class="level2">
-<h2 class="anchored" data-anchor-id="plot-header-1">Plot Header</h2>
+<section id="does-the-weekend-share-change" class="level2">
+<h2 class="anchored" data-anchor-id="does-the-weekend-share-change">Does the weekend share change?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../..\pages/project/figs/mpg-by-wt-for-cyl.png" class="img-fluid figure-img" style="width:80.0%" alt="This is alt-text for describing the plot for screen readers ..."></p>
-<figcaption>Caption Text</figcaption>
+<p><img src="../../pages/project/figs/restaurant_weekend_share.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Weekday and weekend percentages within each cuisine, with the percentages labeled inside each bar</figcaption>
 </figure>
 </div>
-</section>
-<section id="plot-explanation-1" class="level2">
-<h2 class="anchored" data-anchor-id="plot-explanation-1">Plot Explanation</h2>
-<p>Blah, blah, blah …</p>
+<p>Weekdays account for most visits in every cuisine. Mexican and Asian have the largest weekend shares at about 31% each, while seafood has the smallest at about 25%. I sorted the bars by weekend share to make that comparison easier to see.</p>
+<p>These percentages are shares of the visits in this dataset. They do not adjust for the number of weekdays and weekend days, so I would not use them alone to say when people are more likely to dine out.</p>
+<p>I cleaned the category labels by trimming spaces and using lowercase spelling, then set weekday before weekend for a consistent order. The cleaning step kept all 2,000 rows.</p>
 
 
 </section>

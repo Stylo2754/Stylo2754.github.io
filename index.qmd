@@ -6,7 +6,7 @@ about:
   template: trestles
   #template: broadside
   # image details
-    image: "files/profile pic.jpeg"
+  image: "files/profile pic.jpeg"
   image-width: 20em            # to adjust size
   image-shape: round           # to make round
   

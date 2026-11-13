@@ -1,115 +1,112 @@
 ---
-title: "This is the pages/project/index page title"
+title: "What the restaurant visits show"
+author: "Stanley Lo"
 ---
 
-This is a Quarto website.
+I wanted to see which cuisines appear most often in these 2,000 restaurant visits, then check whether the weekday and weekend mix changes by cuisine. The first chart counts visits. The second divides each cuisine's visits into weekday and weekend shares, so a cuisine with more visits does not automatically look like it has a bigger weekend share.
 
-## This is a header
-
-With content ... 
-
-### And a sub-header 
-
-And more content ... 
-
-### And a code block 
-
-```{r, loading-libraries-and-functions}
+```{r}
+#| label: setup
 #| message: false
 #| warning: false
 #| include: false
 
-# libraries
 library(here)
-library(ggplot2) 
-library(dplyr) 
-source(here::here("pages", "project", "src", "functions", "save_plot_as_png.R"))
+library(ggplot2)
+source(here("pages", "project", "src", "functions", "save_plot_as_png.R"))
 ```
 
-
-```{r, getting-data}
+```{r}
+#| label: read-data
 #| message: false
 #| warning: false
 #| include: false
 
-# call script to read clean/wrangle and write data for later use 
-source(here::here("pages", "project", "src", "data", "data_cleaning.R"))
-
-# read data
-mtcars <- readRDS(here::here("pages", "project", "data", "mtcars.Rds"))
+source(here("pages", "project", "src", "data", "restaurant_dining_cleaning.R"))
+df <- readRDS(here("pages", "project", "data", "cleaned", "restaurant_dining_cleaned.Rds"))
 ```
 
-```{r, plot-mpg-by-hp}
+## Which cuisines show up most?
+
+```{r}
+#| label: cuisine-counts
 #| echo: false
 #| message: false
-#| warning: false
 
-# create plot
-# recommendation: always save plots as png so that you have an easily accessible
-# plot file available for other purpose (slide, sharing, etc.); extracting plots
-# from a webpage manually is more difficult 
-# then embed the png into the webpage 
+p_count <- df |>
+  dplyr::mutate(cuisine_type = forcats::fct_rev(forcats::fct_infreq(cuisine_type))) |>
+  ggplot(mapping = aes(y = cuisine_type)) +
+  geom_bar(width = 0.6) +
+  scale_x_continuous(breaks = scales::breaks_width(50)) +
+  labs(
+    title = "Total dining visits by cuisine type",
+    x = "Number of Visits",
+    y = "Cuisine Type"
+  )
 
-p <- 
-  mtcars |>
-  ggplot(mapping = aes(x = hp, y = mpg)) +
-  geom_point()
-```
-
-```{r, saveplot-mpg}
-#| message: false
-#| warning: false
-#| include: false
-
-# save the plot as a .png file using the save_plot_as_png()
 save_plot_as_png(
-  plot = p,
-  file_name = "mpg-by-hp.png"
+  user_name = "project",
+  file_name = "restaurant_cuisine_counts.png",
+  plot = p_count,
+  width = 7,
+  height = 4.5,
+  units = "in",
+  dpi = 300
 )
 ```
 
-## Plot Header
+![Number of recorded restaurant visits for each cuisine, sorted from most to least](/pages/project/figs/restaurant_cuisine_counts.png){width=80%}
 
-![Caption Text](/pages/project/figs/mpg-by-hp.png){width=80% fig-alt="This is alt-text for describing the plot for screen readers ..."}
+Italian has 439 visits and Asian has 434, nearly tied at the top. Seafood has 167, the fewest in this file. This tells me how the recorded visits are distributed, but not why people chose a cuisine.
 
+## Does the weekend share change?
 
-## Plot Explanation
-
-Blah, blah, blah ...
-
-
-```{r, plot-mpg-by-wt-for-cyl}
+```{r}
+#| label: weekend-share
 #| echo: false
 #| message: false
-#| warning: false
 
-# create plot for subset
-p <- 
-  mtcars |>
-  # get only 6 cylinder cars
-  filter(cyl %in% 4:6) |>
-  ggplot(mapping = aes(x = wt, y = mpg)) +
-  geom_point()
-```
+p_percent <- df |>
+  dplyr::count(cuisine_type, day_type) |>
+  dplyr::mutate(pct = n / sum(n), .by = cuisine_type) |>
+  dplyr::mutate(
+    weekend_share = sum(pct[day_type == "weekend"]),
+    .by = cuisine_type
+  ) |>
+  dplyr::mutate(
+    cuisine_type = forcats::fct_reorder(cuisine_type, weekend_share),
+    day_type = factor(day_type, levels = c("weekday", "weekend"))
+  ) |>
+  ggplot(mapping = aes(x = pct, y = cuisine_type, fill = day_type)) +
+  geom_col(position = position_stack(reverse = TRUE)) +
+  geom_text(
+    mapping = aes(label = scales::percent(x = pct, accuracy = 1)),
+    position = position_stack(vjust = 0.5, reverse = TRUE),
+    fontface = "bold"
+  ) +
+  scale_x_continuous(name = NULL, breaks = NULL) +
+  theme(axis.text.y = element_text(face = "bold")) +
+  labs(
+    title = "Weekday and weekend share within each cuisine",
+    y = "Cuisine Type",
+    fill = "Day Type"
+  )
 
-<!-- SAVE PLOT AS PNG -->
-
-```{r, saveplot-cyl-subset}
-#| message: false
-#| warning: false
-#| include: false
-
-# save the plot as a .png file using the save_plot_as_png()
 save_plot_as_png(
-  plot = p,
-  file_name = "mpg-by-wt-for-cyl.png"
+  user_name = "project",
+  file_name = "restaurant_weekend_share.png",
+  plot = p_percent,
+  width = 7,
+  height = 4.5,
+  units = "in",
+  dpi = 300
 )
 ```
 
-## Plot Header
+![Weekday and weekend percentages within each cuisine, with the percentages labeled inside each bar](/pages/project/figs/restaurant_weekend_share.png){width=80%}
 
-![Caption Text](/pages/project/figs/mpg-by-wt-for-cyl.png){width=80% fig-alt="This is alt-text for describing the plot for screen readers ..."}
+Weekdays account for most visits in every cuisine. Mexican and Asian have the largest weekend shares at about 31% each, while seafood has the smallest at about 25%. I sorted the bars by weekend share to make that comparison easier to see.
 
-## Plot Explanation
+These percentages are shares of the visits in this dataset. They do not adjust for the number of weekdays and weekend days, so I would not use them alone to say when people are more likely to dine out.
 
-Blah, blah, blah ...
+I cleaned the category labels by trimming spaces and using lowercase spelling, then set weekday before weekend for a consistent order. The cleaning step kept all 2,000 rows.
